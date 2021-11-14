@@ -19,6 +19,9 @@ const usersModule = (() => {
         </tr>`
         document.getElementById('users-list').insertAdjacentHTML('beforeend', body)
       }
+    },
+    createUser: async() => {
+      
     }
   }
 })()
