@@ -1,22 +1,25 @@
 const usersModule = (() => {
   const BASE_URL = "http://localhost:3000/api/v1/users"
 
+  const headers = new Headers()
+  headers.set("Content-Type", "application/json")
+
   return{
-    fetchAllUsers: async () =>{
+    fetchAllUsers: async () => {
       const res = await fetch(BASE_URL)
       const users = await res.json()
-      
-      let body =""
-      for (let i=0; i < users.length; i++){
+
+      for (let i=0; i < users.length; i++) {
         const user = users[i]
-        body += `<tr>
-        <td>${user.id}</td>
-        <td>${user.name}</td>
-        <td>${user.profile}</td>
-        <td>${user.date_of_birth}</td>
-        <td>${user.created_at}</td>
-        <td>${user.updated_at}</td>
-        </tr>`
+        const body = `<tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.profile}</td>
+                        <td>${user.date_of_birth}</td>
+                        <td>${user.created_at}</td>
+                        <td>${user.updated_at}</td>
+                        <td><a href="edit.html?uid=${user.id}">編集</a></td>
+                      </tr>`
         document.getElementById('users-list').insertAdjacentHTML('beforeend', body)
       }
     },
@@ -31,14 +34,13 @@ const usersModule = (() => {
         profile: profile,
         date_of_birth: dateOfBirth
       }
-
+    
       const res = await fetch(BASE_URL, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(body)
       })
 
-      return handleError(res)
     },
     setExistingValue: async (uid) => {
       const res = await fetch(BASE_URL + "/" + uid)
@@ -66,7 +68,6 @@ const usersModule = (() => {
         body: JSON.stringify(body)
       })
 
-      return handleError(res)
     },
     deleteUser: async (uid) => {
       const ret = window.confirm('このユーザーを削除しますか？')
@@ -79,7 +80,6 @@ const usersModule = (() => {
           headers: headers
         })
 
-        return handleError(res)
       }
     }
   }
