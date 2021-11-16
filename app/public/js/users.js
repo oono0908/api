@@ -40,7 +40,7 @@ const usersModule = (() => {
         headers: headers,
         body: JSON.stringify(body)
       })
-
+      return window.location.href = '/'
     },
     setExistingValue: async (uid) => {
       const res = await fetch(BASE_URL + "/" + uid)
