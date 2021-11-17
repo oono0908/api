@@ -14,8 +14,8 @@ const searchModule = (() => {
       for (let i=0; i < result.length; i++) {
         const user = result[i]
         body +=  `<tr>
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
+                   <td>${user.id}</td>
+                   <td>${user.name}</td>
                     <td>${user.profile}</td>
                     <td>${user.date_of_birth}</td>
                     <td>${user.created_at}</td>
